@@ -1004,7 +1004,7 @@ body {
 /* ✅ Toggle Button — OUTSIDE the sidebar */
 .toggle-btn {
     position: fixed;
-    top: 95%;
+    bottom: -14px;
     right: 30px;
     transform: translateY(-50%);
     background: linear-gradient(135deg, #ff00cc, #3333ff);
@@ -1092,6 +1092,13 @@ body {
     }
 }
 
+@media(min-width : 800px) {
+    .toggle-btn {
+        font-size: 80px;
+        bottom: -50px;
+    }
+}
+
 /* *****************************Scrolling-movie*****************************************Scrolling-movie***************************************Scrolling-movie***************************************************************Scrolling-movie*************************************** */
 
 
@@ -1174,7 +1181,7 @@ body {
     }
 }
 
-/* ******************************************************************************************************************************************************************* */
+/* ************************************POPULAR MOVIES HEADING TEXT*****************************************************POPULAR MOVIES HEADING TEXT**************************************************************POPULAR MOVIES HEADING TEXT************************************************** */
 .gradient-text {
     margin-bottom: 20px;
     font-family: 'Bree Serif', serif;
@@ -1215,7 +1222,7 @@ body {
     color: #0ff;
     cursor: pointer;
     z-index: 1000;
-    background: #1e1e2f;
+    background: black;
     padding: 10px;
     border-radius: 50%;
     box-shadow: 0 0 15px #00ffe1;
@@ -1263,4 +1270,29 @@ body {
 #searchInput:focus {
     box-shadow: 0 0 25px #00ffe1, 0 0 45px #00bfff, 0 0 60px #0088ff;
     border-color: #00bfff;
+}
+
+/* Search Bar Count  */
+.search-input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+#resultCount {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #0ff;
+    font-size: 16px;
+    background: rgba(0, 255, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: 12px;
+    pointer-events: none;
+}
+
+@media(min-width : 800px) {
+    .search-icon {
+        font-size: 80px;
+    }
 }

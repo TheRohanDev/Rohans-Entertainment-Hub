@@ -193,15 +193,53 @@ wrappers.forEach(wrapper => {
 
 // ******************************* SEARCH BAR *********************************************** SEARCH BAR ************************************** SEARCH BAR ************************************* SEARCH BAR ******************************************** SEARCH BAR ******************************************* SEARCH BAR ******************************* SEARCH BAR **************************************
 
+// (function() {
+//     // Use let (not const) so redeclaration doesn't error if this runs multiple times
+//     let toggleBtn = document.getElementById('toggleSearch');
+//     let searchBox = document.getElementById('searchBox');
+//     let searchInput = document.getElementById('searchInput');
+
+//     if (!toggleBtn || !searchBox || !searchInput) return;
+
+//     // Toggle search box
+//     toggleBtn.addEventListener('click', () => {
+//         searchBox.classList.toggle('active');
+//         if (searchBox.classList.contains('active')) {
+//             searchInput.focus();
+//         }
+//     });
+
+//     // Close search on outside click
+//     document.addEventListener('click', function(e) {
+//         const isClickInside = toggleBtn.contains(e.target) || searchBox.contains(e.target);
+//         if (!isClickInside) {
+//             searchBox.classList.remove('active');
+//         }
+//     });
+
+//     // Real-time search
+//     searchInput.addEventListener('input', function() {
+//         const filter = this.value.trim().toLowerCase();
+//         const allCards = document.querySelectorAll('#sectionmoviehome .movie-card');
+
+//         allCards.forEach(card => {
+//             const title = card.querySelector('h2')?.textContent.toLowerCase();
+//             card.style.display = title && title.includes(filter) ? 'block' : 'none';
+//         });
+//     });
+// })();
+
+
+
 (function() {
-    // Use let (not const) so redeclaration doesn't error if this runs multiple times
-    let toggleBtn = document.getElementById('toggleSearch');
-    let searchBox = document.getElementById('searchBox');
-    let searchInput = document.getElementById('searchInput');
+    const toggleBtn = document.getElementById('toggleSearch');
+    const searchBox = document.getElementById('searchBox');
+    const searchInput = document.getElementById('searchInput');
+    const resultCountEl = document.getElementById('resultCount'); // ✅ new
 
     if (!toggleBtn || !searchBox || !searchInput) return;
 
-    // Toggle search box
+    // 🔍 Toggle search bar visibility
     toggleBtn.addEventListener('click', () => {
         searchBox.classList.toggle('active');
         if (searchBox.classList.contains('active')) {
@@ -209,22 +247,68 @@ wrappers.forEach(wrapper => {
         }
     });
 
-    // Close search on outside click
+    // ❌ Close search bar if user clicks outside
     document.addEventListener('click', function(e) {
-        const isClickInside = toggleBtn.contains(e.target) || searchBox.contains(e.target);
+        const isClickInside =
+            toggleBtn.contains(e.target) || searchBox.contains(e.target);
         if (!isClickInside) {
             searchBox.classList.remove('active');
         }
     });
 
-    // Real-time search
+    // 🧭 Identify currently visible section (based on display)
+    function getActiveSectionContainer() {
+        const sectionIds = [
+            'sectionmoviehome',
+            'sectionmovie',
+            'sectionseries',
+            'sectioncartoon',
+            'sectiontreading'
+        ];
+
+        for (const id of sectionIds) {
+            const el = document.getElementById(id);
+            if (el && el.offsetParent !== null) {
+                return el; // visible section
+            }
+        }
+
+        // Default fallback (home)
+        return document.getElementById('sectionmoviehome');
+    }
+
+    // 🔎 Real-time section-based movie search with result count
     searchInput.addEventListener('input', function() {
         const filter = this.value.trim().toLowerCase();
-        const allCards = document.querySelectorAll('#sectionmoviehome .movie-card');
+        const activeSection = getActiveSectionContainer();
+        if (!activeSection) return;
 
-        allCards.forEach(card => {
-            const title = card.querySelector('h2')?.textContent.toLowerCase();
-            card.style.display = title && title.includes(filter) ? 'block' : 'none';
+        const cards = activeSection.querySelectorAll('.movie-card');
+        let matchCount = 0;
+
+        cards.forEach(card => {
+            const titleElement = card.querySelector('h2');
+            const title = titleElement ? titleElement.textContent.toLowerCase() : '';
+
+            if (title && title.includes(filter)) {
+                card.style.display = 'block';
+                matchCount++;
+            } else {
+                card.style.display = 'none';
+            }
         });
+
+        // ✅ Update result count
+        if (resultCountEl) {
+            resultCountEl.textContent = matchCount;
+        }
+    });
+
+    // 📱 Hide mobile keyboard on Enter press
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            searchInput.blur(); // Hides mobile keyboard
+        }
     });
 })();

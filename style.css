@@ -99,6 +99,9 @@ header {
     background-color: black;
     padding: 5px;
     border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 

@@ -88,14 +88,19 @@ header {
 }
 
 .movie-info h2 {
-    font-family: 'Merriweather', serif;
+    /*     font-family: 'Merriweather', serif;
+ */
+    /*  font-family: 'Bree Serif', serif; */
+    font-family: 'Yeseva One', serif;
+
     text-align: center;
     font-weight: 600;
     font-size: 1.5rem;
     margin-top: 10px;
     margin-bottom: 0.5rem;
-    color: #ffd700;
-    text-shadow: 1px 1px 1px #ffa500;
+    color: #56e6fc;
+    /*     text-shadow: 1px 1px 1px #ffa500;
+ */
     background-color: black;
     padding: 5px;
     border-radius: 20px;
@@ -165,7 +170,7 @@ header {
 }
 
 .btn-watch {
-    background: linear-gradient(45deg, #ffd700, #ffa500);
+    background: linear-gradient(45deg, orange, white, blue);
     color: #1b2838;
     border: none;
     padding: 0.8rem 1.5rem;
@@ -180,7 +185,7 @@ header {
 }
 
 .btn-watch:hover {
-    background: linear-gradient(45deg, #ffa500, #ffd700);
+    background: linear-gradient(45deg, white, red);
     box-shadow: 0 8px 20px rgba(255, 215, 0, 0.9);
 }
 
@@ -1275,7 +1280,13 @@ body {
     border-color: #00bfff;
 }
 
-/* Search Bar Count  */
+
+
+/* *************************************** Search Bar Count ********************************************************************************************************** */
+
+
+
+
 .search-input-wrapper {
     position: relative;
     display: inline-block;

@@ -361,7 +361,7 @@ body {
 }
 
 .blaze-navbar {
-    background: linear-gradient(90deg, #141e30, #243b55);
+    background: linear-gradient(140deg, #f7029e, #0afcfc, #0afcfc, white, #beebeb, #243b55, #243b55);
     padding: 1rem 2rem;
     color: white;
     position: sticky;
@@ -370,6 +370,7 @@ body {
     width: 100%;
     transition: transform 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+     border-radius: 20px;
 }
 
 .blaze-container {
